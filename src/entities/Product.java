@@ -3,9 +3,9 @@ package entities;
 public class Product {
     private String name;
     private float barcode;
-    private int price;
+    private double price;
 
-    public Product(String name, float barcode, int price) {
+    public Product(String name, float barcode, double price) {
         this.name = name;
         this.barcode = barcode;
         this.price = price;
@@ -27,11 +27,11 @@ public class Product {
         this.barcode = barcode;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 }

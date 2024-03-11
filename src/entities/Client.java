@@ -1,9 +1,13 @@
 package entities;
 
-public class Client extends Pearson{
+import java.util.ArrayList;
+
+public class Client extends Person {
     private int login = getDocument();
-    public Client(String name, String document, int telephone) {
+    private ArrayList<Product> cart;
+    public Client(String name, int document, int telephone) {
         super(name, document, telephone);
+        cart = new ArrayList<>();
     }
 
     public int getLogin() {
@@ -12,5 +16,13 @@ public class Client extends Pearson{
 
     public void setLogin(int login) {
         this.login = login;
+    }
+
+    public ArrayList<Product> getCart() {
+        return cart;
+    }
+
+    public void setCart(ArrayList<Product> cart) {
+        this.cart = cart;
     }
 }

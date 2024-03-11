@@ -1,9 +1,9 @@
 package entities;
 
-public class Employee extends Pearson{
+public class Employee extends Person {
     private int employeeCode;
     private Drugstore drugstore;
-    public Employee(String name, String document, int telephone, int employeeCode, Drugstore drugstore) {
+    public Employee(String name, int document, int telephone, int employeeCode, Drugstore drugstore) {
         super(name, document, telephone);
         this.employeeCode = employeeCode;
         this.drugstore = drugstore;

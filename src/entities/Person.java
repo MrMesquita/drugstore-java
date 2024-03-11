@@ -1,11 +1,11 @@
 package entities;
 
-public class Pearson {
+public class Person {
     private String name;
     private int document;
     private int telephone;
 
-    public Pearson(String name, String document, int telephone) {
+    public Person(String name, int document, int telephone) {
         this.name = name;
         this.document = document;
         this.telephone = telephone;

@@ -2,7 +2,7 @@ package entities;
 
 public class Drug extends Product{
     private boolean is_controlled;
-    public Drug(String name, float barcode, int price, boolean is_controlled) {
+    public Drug(String name, float barcode, double price, boolean is_controlled) {
         super(name, barcode, price);
         this.is_controlled = is_controlled;
     }
