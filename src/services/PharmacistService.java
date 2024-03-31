@@ -28,19 +28,17 @@ public class PharmacistService implements IPharmacistService {
     }
 
     @Override
-    public void changePharmacist(String name, Pharmacist newPharmacist) throws NameInvalidException, DocumentInvalidException, NotFoundException, CRFInvalidException {
-        if(name == null || name.trim().isEmpty() || name.trim().isBlank()){
-            throw new NameInvalidException(name);
+    public void changePharmacist(int employeeCode, Pharmacist newPharmacist) throws NameInvalidException, DocumentInvalidException, NotFoundException, CRFInvalidException, EmployeeCodeInvalidException {
+        if(employeeCode > 0){
+            throw new EmployeeCodeInvalidException(employeeCode);
         }else if (newPharmacist.getName() == null || newPharmacist.getName().trim().isEmpty() || newPharmacist.getName().length() < 3) {
             throw new NameInvalidException(newPharmacist.getName());
         }else if(newPharmacist.getDocument() < 8 || newPharmacist.getDocument() > 14){
             throw new DocumentInvalidException(newPharmacist.getDocument());
         }else if(newPharmacist.getCRF() != 0){
             throw new CRFInvalidException(newPharmacist.getCRF());
-        }else if(newPharmacist.getCRF() != 0) {
-            throw new CRFInvalidException(newPharmacist.getCRF());
         }else{
-            Pharmacist foundedPharmacist = findPharmacist(name);
+            Pharmacist foundedPharmacist = findPharmacist(employeeCode);
             repository.changePharmacist(pharmacists.indexOf(foundedPharmacist), newPharmacist);
         }
     }
@@ -58,17 +56,17 @@ public class PharmacistService implements IPharmacistService {
     }
 
     @Override
-    public void deletePharmacist(String namePharmacist) throws NotFoundException {
-        Pharmacist foundedPharmacist = findPharmacist(namePharmacist);
+    public void deletePharmacist(int employeeCode) throws NotFoundException {
+        Pharmacist foundedPharmacist = findPharmacist(employeeCode);
         if (foundedPharmacist != null) {
             repository.removePharmacist(foundedPharmacist);
         }
     }
 
     @Override
-    public Pharmacist findPharmacist(String namePharmacist) throws NotFoundException {
+    public Pharmacist findPharmacist(int employeeCode) throws NotFoundException {
         for (Pharmacist pharmacist : pharmacists) {
-            if (pharmacist.getName().equals(namePharmacist)) {
+            if (pharmacist.getEmployeeCode() == employeeCode) {
                 return pharmacist;
             }else{
                 throw new NotFoundException("Farmacêutico");

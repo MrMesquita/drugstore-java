@@ -21,7 +21,7 @@ public class PersonService implements IPersonService {
             throw new NameInvalidException(name);
         }else if(person.getDocument() < 8 || person.getDocument() > 14){
             throw new DocumentInvalidException(person.getDocument());
-        } else{
+        }else{
             repository.savePerson(person);
         }
     }
