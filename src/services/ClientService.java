@@ -8,13 +8,14 @@ import interfaces.services.IClientService;
 import interfaces.services.IEmployeeClientService;
 import interfaces.services.IProductClientService;
 import repositories.ClientRepository;
+import repositories.FilaClientes;
 
 import javax.xml.namespace.QName;
 import java.util.ArrayList;
 
 public class ClientService implements IClientService {
     private IClientRepository repository = new ClientRepository();
-    private ArrayList<Client> clients = repository.getClients();
+    private FilaClientes clients = repository.getClients();
     @Override
     public void addClient(String name, int document, int telephone) throws ClientException, NameInvalidException, DocumentInvalidException {
         if(name == null || document < 0 || telephone < 0) {
@@ -33,13 +34,7 @@ public class ClientService implements IClientService {
 
     @Override
     public void printAll() {
-        for (Client client : clients){
-            System.out.println(
-                "Nome: "+client.getName()+
-                "\nDocumento: "+client.getDocument()+
-                "\nTelefone: "+client.getTelephone()
-            );
-        }
+        repository.printFila();
     }
 
     @Override
@@ -89,7 +84,7 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public void buyProducts(String nameClient, int cashierNumber) throws NameInvalidException, CashierInvalidException {
+    public void buyProducts(String nameClient, int cashierNumber) throws NameInvalidException, CashierInvalidException, CashierException {
         IEmployeeClientService employeeClientService = new EmployeeService();
         if(nameClient == null || nameClient.trim().isBlank() || nameClient.isEmpty()){
             throw new NameInvalidException(nameClient);
@@ -109,7 +104,7 @@ public class ClientService implements IClientService {
         if(name == null || name.trim().isBlank() || name.isEmpty()){
             throw new NameInvalidException(name);
         }
-        for (Client client : clients){
+        for (Client client : clients.getFila()){
             if(client.getName().equals(name)){
                 return client;
             }

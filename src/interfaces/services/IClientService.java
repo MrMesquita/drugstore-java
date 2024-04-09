@@ -9,7 +9,7 @@ public interface IClientService {
     public void change(String oldClientName, Client newClient) throws NameInvalidException, DocumentInvalidException, ClientException;
     public void deleteClient(String name) throws NameInvalidException, ClientException;
     public void addProductToCart(String nameProduct, String clientName) throws NameInvalidException, ProductNotFoundException, ClientNotFoundException;
-    public void buyProducts(String nameClient, int cashierNumber) throws NameInvalidException, CashierInvalidException;
+    public void buyProducts(String nameClient, int cashierNumber) throws NameInvalidException, CashierInvalidException, CashierException;
     public void requestAnAppointment();
     public Client findClient(String name) throws NameInvalidException;
 }

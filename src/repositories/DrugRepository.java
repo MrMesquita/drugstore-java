@@ -2,14 +2,13 @@ package repositories;
 
 import entities.Drug;
 import interfaces.repositories.IDrugRepository;
-import java.util.ArrayList;
 
 public class DrugRepository implements IDrugRepository {
-    private ArrayList<Drug> drugs = new ArrayList<>();
+    private PilhaDrugs drugs = new PilhaDrugs();
 
     @Override
     public void saveDrug(Drug drug) {
-        drugs.add(drug);
+        drugs.push(drug);
     }
 
     @Override
@@ -18,12 +17,12 @@ public class DrugRepository implements IDrugRepository {
     }
 
     @Override
-    public ArrayList<Drug> getDrugs() {
+    public PilhaDrugs getDrugs() {
         return drugs;
     }
 
     @Override
-    public void removeDrug(Drug drug) {
-        drugs.remove(drug);
+    public void removeDrug() {
+        drugs.pop();
     }
 }

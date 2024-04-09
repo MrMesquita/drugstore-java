@@ -8,12 +8,13 @@ import exceptions.*;
 import interfaces.services.ICashierService;
 import interfaces.repositories.ICashierRepository;
 import repositories.CashierRepository;
+import repositories.ListaCashier;
 
 import java.util.ArrayList;
 
 public class CashierService implements ICashierService {
     private ICashierRepository repository = new CashierRepository();
-    private ArrayList<Cashier> cashiers = repository.getCashiers();
+    private ListaCashier cashiers = repository.getCashiers();
     @Override
     public void addCashier(int number, Employee employee) throws CashierInvalidException, NameInvalidException, DocumentInvalidException, EmployeeCodeInvalidException {
         if(number < 0 || employee == null){
@@ -32,37 +33,16 @@ public class CashierService implements ICashierService {
     }
 
     @Override
-    public void change(int number, Cashier newCashier) throws CashierException, NameInvalidException, DocumentInvalidException, EmployeeCodeInvalidException, CashierInvalidException {
-        if(number < 0 || newCashier.getEmployee() == null){
-            throw new CashierInvalidException();
-        }else if (newCashier.getEmployee().getName() == null || newCashier.getEmployee().getName().trim().isEmpty() || newCashier.getEmployee().getName().length() < 3) {
-            throw new NameInvalidException(newCashier.getEmployee().getName());
-        }else if(newCashier.getEmployee().getDocument() < 8 || newCashier.getEmployee().getDocument() > 14){
-            throw new DocumentInvalidException(newCashier.getEmployee().getDocument());
-        }else if(newCashier.getEmployee().getEmployeeCode() != 0){
-            throw new EmployeeCodeInvalidException(newCashier.getEmployee().getEmployeeCode());
-        }
-        Cashier foundedCashier = findCashier(number);
-        if(foundedCashier != null){
-            repository.changeCashier(cashiers.indexOf(foundedCashier), newCashier);
-        }
-    }
-
-    @Override
-    public void deleteCashier(int number) throws CashierException {
-        if(number < 0){
+    public void deleteCashier(int index) throws CashierException {
+        if(index < 0){
             throw new CashierException("Número inválido!");
         }
-
-        Cashier foundedCashier = findCashier(number);
-        if(foundedCashier != null){
-            repository.removeCashiers(foundedCashier);
-        }
+        repository.removeCashiers(index);
     }
 
     @Override
     public void printCashiers() {
-        for(Cashier cashier : cashiers){
+        for(Cashier cashier : cashiers.getList()){
             System.out.println(
                 "Caixa "+cashier.getNumber()+
                 "\nFuncionário: "+cashier.getEmployee().getName()
@@ -76,7 +56,7 @@ public class CashierService implements ICashierService {
             throw new CashierException("Número inválido!");
         }
 
-        for (Cashier cashier : cashiers){
+        for (Cashier cashier : cashiers.getList()){
             if(cashier.getNumber() == number){
                 return cashier;
             }

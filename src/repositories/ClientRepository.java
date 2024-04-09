@@ -3,13 +3,11 @@ package repositories;
 import entities.Client;
 import interfaces.repositories.IClientRepository;
 
-import java.util.ArrayList;
-
 public class ClientRepository implements IClientRepository {
-    private ArrayList<Client> clients = new ArrayList<>();
+    private FilaClientes clients = new FilaClientes();
     @Override
     public void saveClient(Client client) {
-        clients.add(client);
+        clients.enqueue(client);
     }
 
     @Override
@@ -18,12 +16,16 @@ public class ClientRepository implements IClientRepository {
     }
 
     @Override
-    public ArrayList<Client> getClients() {
+    public FilaClientes getClients() {
         return clients;
+    }
+
+    public void printFila(){
+        clients.printFila();
     }
 
     @Override
     public void removeClient(Client client) {
-        clients.remove(client);
+        clients.dequeue();
     }
 }

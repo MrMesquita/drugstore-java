@@ -1,12 +1,11 @@
 package interfaces.repositories;
 
 import entities.Drug;
-
-import java.util.ArrayList;
+import repositories.PilhaDrugs;
 
 public interface IDrugRepository {
     public void saveDrug(Drug drug);
     public void changeDrug(int index, Drug newDrug);
-    public ArrayList<Drug> getDrugs();
-    public void removeDrug(Drug drug);
+    public PilhaDrugs getDrugs();
+    public void removeDrug();
 }

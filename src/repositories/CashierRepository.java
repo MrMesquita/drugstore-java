@@ -2,14 +2,13 @@ package repositories;
 
 import entities.Cashier;
 import interfaces.repositories.ICashierRepository;
-import java.util.ArrayList;
 
 public class CashierRepository implements ICashierRepository {
-    private ArrayList<Cashier> cashiers = new ArrayList<>();
+    private ListaCashier cashiers = new ListaCashier();
 
     @Override
     public void saveCashier(Cashier cashier) {
-        cashiers.add(cashier);
+        cashiers.addFirst(cashier);
     }
 
     @Override
@@ -18,12 +17,12 @@ public class CashierRepository implements ICashierRepository {
     }
 
     @Override
-    public ArrayList<Cashier> getCashiers() {
+    public ListaCashier getCashiers() {
         return cashiers;
     }
 
     @Override
-    public void removeCashiers(Cashier cashier) {
-        cashiers.remove(cashier);
+    public void removeCashiers(int index) {
+        cashiers.delete(index);
     }
 }
